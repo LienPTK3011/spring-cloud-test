@@ -10,3 +10,10 @@ eureka:
   instance:
     preferIpAddress: true
     lease-renewal-interval-in-seconds: 30
+
+zuul:
+  routes:
+    customer-service:
+       path: /customer/**
+       url: http://192.168.36.1:8080/customer
+       service-id: customer-service
