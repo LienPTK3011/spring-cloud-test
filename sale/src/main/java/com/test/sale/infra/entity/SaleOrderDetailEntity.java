@@ -14,11 +14,13 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "sale_order_detail")
 @Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class SaleOrderDetailEntity implements Serializable {

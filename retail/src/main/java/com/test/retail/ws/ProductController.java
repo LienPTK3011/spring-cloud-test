@@ -2,12 +2,14 @@ package com.test.retail.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.retail.app.ProductService;
 import com.test.retail.ws.dto.ProductIncreaseDTO;
 
-@RestController(value = "/product")
+@RestController
+@RequestMapping("/product")
 public class ProductController {
 	
 	@Autowired

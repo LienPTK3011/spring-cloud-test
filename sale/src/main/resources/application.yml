@@ -19,3 +19,6 @@ eureka:
   instance:
     preferIpAddress: true
     lease-renewal-interval-in-seconds: 30
+client:
+  customer-service: http://192.168.36.1:8080
+  product-service: http://192.168.36.1:8081

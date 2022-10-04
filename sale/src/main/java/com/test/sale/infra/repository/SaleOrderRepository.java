@@ -9,5 +9,5 @@ public interface SaleOrderRepository {
 	 *
 	 * @param saleOrder: sale order info
 	 */
-	public void save(SaleOrder saleOrder);
+	public SaleOrder save(SaleOrder saleOrder);
 }

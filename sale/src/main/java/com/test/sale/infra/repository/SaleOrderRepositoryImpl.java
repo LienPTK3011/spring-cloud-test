@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.test.sale.domain.SaleOrder;
+import com.test.sale.domain.SaleOrderDetail;
 import com.test.sale.infra.entity.SaleOrderDetailEntity;
 import com.test.sale.infra.entity.SaleOrderEntity;
 import com.test.sale.infra.jpa.JpaSaleOrderRepository;
@@ -18,8 +19,9 @@ public class SaleOrderRepositoryImpl implements SaleOrderRepository {
 	private JpaSaleOrderRepository saleOrderRepository;
 
 	@Override
-	public void save(SaleOrder saleOrder) {
-		this.saleOrderRepository.save(this.toEntity(saleOrder));
+	public SaleOrder save(SaleOrder saleOrder) {
+		SaleOrderEntity entity = this.saleOrderRepository.save(this.toEntity(saleOrder));
+		return this.toDomain(entity);
 	}
 	
 	private SaleOrderEntity toEntity(SaleOrder saleOrder) {
@@ -28,6 +30,19 @@ public class SaleOrderRepositoryImpl implements SaleOrderRepository {
 					.orderTime(LocalDateTime.now())
 					.saleOrderDetails(saleOrder.getSaleOrderDetails().stream()
 						.map(t -> SaleOrderDetailEntity.builder()
+							.productId(t.getProductId())
+							.productCount(t.getProductCount())
+							.build()
+						).collect(Collectors.toList())
+					)
+					.build();
+	}
+	
+	private SaleOrder toDomain(SaleOrderEntity saleOrder) {
+		return SaleOrder.builder()
+					.customerId(saleOrder.getCustomerId())
+					.saleOrderDetails(saleOrder.getSaleOrderDetails().stream()
+						.map(t -> SaleOrderDetail.builder()
 							.productId(t.getProductId())
 							.productCount(t.getProductCount())
 							.build()

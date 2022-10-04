@@ -16,4 +16,10 @@ public class SaleOrder {
 	private int customerId;
 
 	private List<SaleOrderDetail> saleOrderDetails;
+	
+	public Double orderAmount() {
+		return this.saleOrderDetails.stream()
+				.mapToDouble(t -> t.getProductCount() * t.getUnitPrice())
+				.sum();
+	}
 }

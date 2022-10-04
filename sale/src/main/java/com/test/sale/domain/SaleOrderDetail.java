@@ -14,4 +14,7 @@ public class SaleOrderDetail {
 	private int productId;
 
 	private int productCount;
+
+	private double unitPrice;
+
 }

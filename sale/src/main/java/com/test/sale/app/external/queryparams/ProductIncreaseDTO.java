@@ -1,4 +1,4 @@
-package com.test.sale.ws.dto;
+package com.test.sale.app.external.queryparams;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SaleOrderDetailDTO {
+public class ProductIncreaseDTO {
+
 	private int productId;
-	private int productCount;
-	private double unitPrice;
+
+	private int productNumber;
+
 }

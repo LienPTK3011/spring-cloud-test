@@ -1,22 +1,22 @@
 package com.test.sale.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
+import com.test.sale.app.SaleOrderService;
+import com.test.sale.ws.dto.SaleOrderDTO;
 
 @RestController
 @RequestMapping("/sale-order")
 public class SaleOrderController {
 
 	@Autowired
-	private RestTemplate restTemplate;
+	private SaleOrderService saleOrderService;
 
-	@GetMapping("demo")
-	public String demo() {
-		String demo = restTemplate.getForObject("http://customer-service/customer/demo", String.class);
-
-		return demo;
+	@PostMapping("/submit-order")
+	public void submiOrder(SaleOrderDTO saleOrderDTO) {
+		this.saleOrderService.createSaleOrder(saleOrderDTO);
 	}
 }
