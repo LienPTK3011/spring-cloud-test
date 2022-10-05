@@ -11,7 +11,7 @@ import com.test.customer.infra.entity.AccountTransactionEntity;
 
 public interface JpaAccountTransactionRepository extends JpaRepository<AccountTransactionEntity, Integer> {
 
-	@Query("SELECT t FROM AccountTransactionEntity t WHERE t.transactionDate >= :startDate AND t.transactionDate >= :endDate")
+	@Query("SELECT t FROM AccountTransactionEntity t WHERE t.transactionDate >= :startDate AND t.transactionDate <= :endDate")
 	List<AccountTransactionEntity> findByDatePeriod(@Param("startDate") LocalDateTime startDate,
 													@Param("endDate") LocalDateTime endDate);
 

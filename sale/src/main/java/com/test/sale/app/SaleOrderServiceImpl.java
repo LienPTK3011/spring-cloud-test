@@ -32,10 +32,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 
 	@Override
 	public void createSaleOrder(SaleOrderDTO dto) {
-		
-		// save order
-		SaleOrder saleOrder = this.saleOrderRepository.save(
-			SaleOrder.builder()
+		SaleOrder orderInfo = SaleOrder.builder()
 				.customerId(dto.getCustomerId())
 				.saleOrderDetails(dto.getLstOrderDetail().stream()
 					.map(t -> SaleOrderDetail.builder()
@@ -44,12 +41,14 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 						.unitPrice(t.getUnitPrice())
 						.build()
 					).collect(Collectors.toList())
-				).build()
-		);
+				).build();
+		
+		// save order
+		SaleOrder saleOrder = this.saleOrderRepository.save(orderInfo);
 		
 		// customer balance reduce
 		this.customerClientService.reduceCustomerDepositAmount(
-			new CustomerReduceBalanceDTO(dto.getCustomerId(), saleOrder.orderAmount())
+			new CustomerReduceBalanceDTO(dto.getCustomerId(), orderInfo.orderAmount())
 		);
 
 		// product number reduce

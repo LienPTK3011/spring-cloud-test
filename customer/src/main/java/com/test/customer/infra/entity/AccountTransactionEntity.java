@@ -3,9 +3,9 @@ package com.test.customer.infra.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +39,7 @@ public class AccountTransactionEntity implements Serializable {
 	@Column(name = "transaction_date")
 	private LocalDateTime transactionDate;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bank_account_id", referencedColumnName = "id")
 	private BankAccountEntity bankAccount;
 
