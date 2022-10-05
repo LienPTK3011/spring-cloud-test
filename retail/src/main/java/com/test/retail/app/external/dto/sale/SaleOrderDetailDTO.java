@@ -1,4 +1,4 @@
-package com.test.sale.ws.dto;
+package com.test.retail.app.external.dto.sale;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class SaleOrderDetailDTO {
 	private int productId;
 	private int productCount;
-	private double unitPrice;
 }

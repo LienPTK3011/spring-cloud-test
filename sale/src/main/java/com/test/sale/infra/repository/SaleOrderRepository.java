@@ -1,5 +1,8 @@
 package com.test.sale.infra.repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import com.test.sale.domain.SaleOrder;
 
 public interface SaleOrderRepository {
@@ -10,4 +13,6 @@ public interface SaleOrderRepository {
 	 * @param saleOrder: sale order info
 	 */
 	public SaleOrder save(SaleOrder saleOrder);
+	
+	public List<SaleOrder> findByDate(LocalDateTime startDate, LocalDateTime endDate);
 }

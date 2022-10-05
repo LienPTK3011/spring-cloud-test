@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Product {
 
-	private int id;
+	private Integer id;
 
 	private String code;
 
@@ -21,7 +21,7 @@ public class Product {
 
 	private double unitPrice;
 
-	private double remainNumber;
+	private int remainNumber;
 	
 	private String description;
 

@@ -27,7 +27,7 @@ public class ProductEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 
 	@Column(name = "code")
 	private String code;
@@ -39,7 +39,7 @@ public class ProductEntity implements Serializable {
 	private double unitPrice;
 
 	@Column(name = "remain_number")
-	private double remainNumber;
+	private int remainNumber;
 
 	@Column(name = "description")
 	private String description;

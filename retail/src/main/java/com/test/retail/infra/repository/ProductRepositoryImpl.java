@@ -1,6 +1,9 @@
 package com.test.retail.infra.repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,13 +19,21 @@ public class ProductRepositoryImpl implements ProductRepository {
 	private JpaProductRepository productRepository;
 
 	@Override
-	public void update(Product product) {
+	public void save(Product product) {
 		this.productRepository.save(this.toEntity(product));
 	}
 
 	@Override
 	public Optional<Product> findProductById(int productId) {
 		return this.productRepository.findById(productId).map(t -> this.toDomain(t));
+	}
+
+	@Override
+	public List<Product> findByIds(Set<Integer> ids) {
+		return this.productRepository.findByIdIn(ids)
+				.stream()
+				.map(t -> this.toDomain(t))
+				.collect(Collectors.toList());
 	}
 	
 	private ProductEntity toEntity(Product product) {

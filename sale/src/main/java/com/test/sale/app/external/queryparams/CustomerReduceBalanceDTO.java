@@ -11,6 +11,6 @@ public class CustomerReduceBalanceDTO {
 
 	private int customerId;
 
-	private double reductionAmount;
+	private double amount;
 
 }

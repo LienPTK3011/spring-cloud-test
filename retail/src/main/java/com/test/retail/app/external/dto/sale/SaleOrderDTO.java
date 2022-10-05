@@ -1,4 +1,4 @@
-package com.test.sale.ws.dto;
+package com.test.retail.app.external.dto.sale;
 
 import java.util.List;
 

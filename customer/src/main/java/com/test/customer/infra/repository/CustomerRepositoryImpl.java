@@ -19,7 +19,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 	private JpaCustomerRepository customerRepository;
 
 	@Override
-	public void update(Customer customer) {
+	public void save(Customer customer) {
 		this.customerRepository.save(this.toEntity(customer));
 	}
 

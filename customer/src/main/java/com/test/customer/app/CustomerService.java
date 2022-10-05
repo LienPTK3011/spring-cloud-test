@@ -1,5 +1,7 @@
 package com.test.customer.app;
 
+import com.test.customer.ws.dto.CustomerDTO;
+
 public interface CustomerService {
 
 	/**
@@ -10,4 +12,7 @@ public interface CustomerService {
 	 */
 	public void reduceCustomerDepositAmount(int customerId, double amount);
 
+	public void addingBalance(int customerId, double amount);
+
+	public void saveCustomer(CustomerDTO customerDTO);
 }

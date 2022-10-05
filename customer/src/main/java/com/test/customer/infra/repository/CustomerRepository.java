@@ -7,11 +7,11 @@ import com.test.customer.domain.Customer;
 public interface CustomerRepository {
 	
 	/**
-	 * Update customer info
+	 * Save customer info
 	 * 
 	 * @param domain customer
 	 */
-	public void update(Customer customer);
+	public void save(Customer customer);
 	
 	/**
 	 * Find customer by id

@@ -30,7 +30,7 @@ public class SaleOrderDetailEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
 	@Column(name = "product_id")
 	private int productId;
@@ -39,6 +39,6 @@ public class SaleOrderDetailEntity implements Serializable {
 	private int productCount;
 
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "sale_order_id")
+    @JoinColumn(name = "sale_order_id", referencedColumnName = "id")
 	private SaleOrderEntity saleOrder;
 }

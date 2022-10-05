@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Customer {
 
-	private int id;
+	private Integer id;
 
 	private String name;
 
@@ -24,12 +24,16 @@ public class Customer {
 	private Gender gender;
 
 	private String email;
-	
+
 	private BankAccount bankAccount;
-	
+
 	public void reduceCustomerAmount(double amount) {
-		if (this.bankAccount.getRemainAmount()  > amount) {
+		if (this.bankAccount.getRemainAmount() > amount) {
 			this.bankAccount.setRemainAmount(this.bankAccount.getRemainAmount() - amount);
 		}
+	}
+
+	public void addingBalance(double amount) {
+		this.bankAccount.setRemainAmount(this.bankAccount.getRemainAmount() + amount);
 	}
 }

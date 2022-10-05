@@ -1,19 +1,15 @@
-package com.test.customer.domain;
-
-import java.time.LocalDate;
+package com.test.customer.ws.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankAccount {
+public class BankAccountDTO {
 
 	private Integer id;
 
@@ -21,7 +17,4 @@ public class BankAccount {
 
 	private Double cardLimit;
 
-	private LocalDate expiredDate;
-
-	private Double remainAmount;
 }
