@@ -16,16 +16,17 @@ import com.test.customer.infra.jpa.JpaCustomerRepository;
 public class CustomerRepositoryImpl implements CustomerRepository {
 
 	@Autowired
-	private JpaCustomerRepository customerRepository;
+	private JpaCustomerRepository jpaCustomerRepository;
 
 	@Override
-	public void save(Customer customer) {
-		this.customerRepository.save(this.toEntity(customer));
+	public Customer save(Customer customer) {
+		CustomerEntity entity = this.jpaCustomerRepository.save(this.toEntity(customer));
+		return this.toDomain(entity);
 	}
 
 	@Override
 	public Optional<Customer> findById(int customerId) {
-		return this.customerRepository.findById(customerId).map(t -> this.toDomain(t));
+		return this.jpaCustomerRepository.findById(customerId).map(t -> this.toDomain(t));
 	}
 
 	private CustomerEntity toEntity(Customer customer) {

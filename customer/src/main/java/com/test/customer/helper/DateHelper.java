@@ -19,4 +19,11 @@ public class DateHelper {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
 		return LocalDate.parse(date, formatter);
 	}
+	
+	public static String convertLocalDateToString(LocalDate date, String pattern) {
+
+		// Pattern of date
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+		return date.format(formatter);
+	}
 }

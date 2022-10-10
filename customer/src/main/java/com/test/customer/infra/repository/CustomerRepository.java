@@ -11,7 +11,7 @@ public interface CustomerRepository {
 	 * 
 	 * @param domain customer
 	 */
-	public void save(Customer customer);
+	public Customer save(Customer customer);
 	
 	/**
 	 * Find customer by id

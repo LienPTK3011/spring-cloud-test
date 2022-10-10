@@ -14,6 +14,7 @@ import com.test.customer.domain.Gender;
 import com.test.customer.helper.DateHelper;
 import com.test.customer.infra.repository.CustomerRepository;
 import com.test.customer.infra.repository.account.AccountTransactionRepository;
+import com.test.customer.ws.dto.BankAccountDTO;
 import com.test.customer.ws.dto.CustomerDTO;
 
 @Service
@@ -26,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 	private AccountTransactionRepository accountTransactionRepository;
 
 	@Override
-	public void reduceCustomerDepositAmount(int customerId, double amount) {
+	public Customer reduceCustomerDepositAmount(int customerId, double amount) {
 		// Find customer by ID
 		Optional<Customer> oCustomer = this.customerRepository.findById(customerId);
 
@@ -35,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
 			oCustomer.get().reduceCustomerAmount(amount);
 
 			// update customer
-			this.customerRepository.save(oCustomer.get());
+			Customer result = this.customerRepository.save(oCustomer.get());
 			
 			this.accountTransactionRepository.addTransaction(
 					AccountTransaction.builder()
@@ -44,12 +45,15 @@ public class CustomerServiceImpl implements CustomerService {
 						.bankAccount(oCustomer.get().getBankAccount())
 						.build()
 			);
+			
+			return result;
 
 		}
+		return null;
 	}
 
 	@Override
-	public void addingBalance(int customerId, double amount) {
+	public Customer addingBalance(int customerId, double amount) {
 		// Find customer by ID
 		Optional<Customer> oCustomer = this.customerRepository.findById(customerId);
 
@@ -58,14 +62,19 @@ public class CustomerServiceImpl implements CustomerService {
 			oCustomer.get().addingBalance(amount);
 
 			// update customer
-			this.customerRepository.save(oCustomer.get());
+			return this.customerRepository.save(oCustomer.get());
 		}
+		return null;
 	}
 
 	@Override
-	public void saveCustomer(CustomerDTO customerDTO) {
-		this.customerRepository.save(
-			Customer.builder()
+	public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
+		Customer customer = this.customerRepository.save(this.toDomain(customerDTO));
+		return this.toDTO(customer);
+	}
+	
+	private Customer toDomain(CustomerDTO customerDTO) {
+		return Customer.builder()
 				.birthday(DateHelper.convertStringToLocalDate(customerDTO.getBirthday(), DateHelper.DATE_FORMAT))
 				.name(customerDTO.getName())
 				.gender(Gender.valueOf(customerDTO.getGender()))
@@ -78,8 +87,22 @@ public class CustomerServiceImpl implements CustomerService {
 						.remainAmount(customerDTO.getBankAccount().getCardLimit())
 						.build()
 				)
-				.build()
-		);
+				.build();
+	}
+
+	private CustomerDTO toDTO(Customer customer) {
+		return CustomerDTO.builder()
+				.birthday(DateHelper.convertLocalDateToString(customer.getBirthday(), DateHelper.DATE_FORMAT))
+				.name(customer.getName())
+				.gender(customer.getGender().value)
+				.email(customer.getEmail())
+				.bankAccount(
+					BankAccountDTO.builder()
+						.bankAccountNumber(customer.getBankAccount().getBankAccountNumber())
+						.cardLimit(customer.getBankAccount().getCardLimit())
+						.build()
+				)
+				.build();
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.test.customer.app;
 
+import com.test.customer.domain.Customer;
 import com.test.customer.ws.dto.CustomerDTO;
 
 public interface CustomerService {
@@ -10,9 +11,9 @@ public interface CustomerService {
 	 * @param customerId: customer id
 	 * @param amount: purchase amount
 	 */
-	public void reduceCustomerDepositAmount(int customerId, double amount);
+	public Customer reduceCustomerDepositAmount(int customerId, double amount);
 
-	public void addingBalance(int customerId, double amount);
+	public Customer addingBalance(int customerId, double amount);
 
-	public void saveCustomer(CustomerDTO customerDTO);
+	public CustomerDTO saveCustomer(CustomerDTO customerDTO);
 }
