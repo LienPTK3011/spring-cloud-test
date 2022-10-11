@@ -17,15 +17,13 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity	
+@Entity
 @Table(name = "sale_order")
 @Builder
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class SaleOrderEntity implements Serializable {
 
@@ -38,11 +36,17 @@ public class SaleOrderEntity implements Serializable {
 
 	@Column(name = "customer_id")
 	private int customerId;
-	
+
 	@Column(name = "order_time")
 	private LocalDateTime orderTime;
 
 	@OneToMany(mappedBy = "saleOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<SaleOrderDetailEntity> saleOrderDetails;
+
+	@Override
+	public boolean equals(Object obj) {
+		SaleOrderEntity other = (SaleOrderEntity) obj;
+		return this.customerId == other.customerId;
+	}
 
 }

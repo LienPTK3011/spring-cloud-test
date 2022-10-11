@@ -29,8 +29,8 @@ public class CompareBalanceSchedule {
 	@Autowired
 	private SaleProductClientService saleProductClientService;
 
-//	@Scheduled(cron = "0 0 0 * * *")
-	@Scheduled(fixedDelay = 20000)
+	@Scheduled(cron = "0 0 0 * * *")
+//	@Scheduled(fixedDelay = 20000)
 	public void compareBalance() {
 		String today = LocalDate.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
 		

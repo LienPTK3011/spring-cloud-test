@@ -1,5 +1,7 @@
-package com.test.sale.service;
+package com.test.sale.ws;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,33 +9,24 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.test.sale.app.SaleOrderService;
-import com.test.sale.app.SaleOrderServiceImpl;
-import com.test.sale.app.external.CustomerClientService;
-import com.test.sale.app.external.ProductClientService;
-import com.test.sale.infra.repository.SaleOrderRepository;
 import com.test.sale.ws.dto.SaleOrderDTO;
 import com.test.sale.ws.dto.SaleOrderDetailDTO;
 
 @ExtendWith(MockitoExtension.class)
-public class SaleOrderServiceTests {
+public class SaleOrderControllerTests {
 
 	@InjectMocks
-    private SaleOrderService service = new SaleOrderServiceImpl();
+	SaleOrderController saleOrderController;
 	
 	@Mock
-	private SaleOrderRepository saleOrderRepository;
-
-	@Mock
-	private CustomerClientService customerService;
-	
-	@Mock
-	private ProductClientService productService;
+	SaleOrderService saleOrderService;
 	
 	@Test
-	void testCreateSaleOrder() {
+	void saveSaleOrrder() {
 		List<SaleOrderDetailDTO> saleOrderDetailDTOs = new ArrayList<SaleOrderDetailDTO>();
 		saleOrderDetailDTOs.add(SaleOrderDetailDTO.builder().productId(1).productCount(1).unitPrice(20).build());
 
@@ -41,8 +34,14 @@ public class SaleOrderServiceTests {
 				.customerId(1)
 				.lstOrderDetail(saleOrderDetailDTOs)
 				.build();
-		
-		service.createSaleOrder(saleOrderDTO);
+		saleOrderController.submiOrder(saleOrderDTO);
+		Mockito.verify(saleOrderService).createSaleOrder(saleOrderDTO);
 	}
-
+	
+	@Test
+	void testSaleOrderLst() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		saleOrderController.saleOrderLst(LocalDate.now().format(formatter));
+		Mockito.verify(saleOrderService).findByDate(LocalDate.now());
+	}
 }

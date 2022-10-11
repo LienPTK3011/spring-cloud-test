@@ -31,14 +31,14 @@ public class AccountTransactionRepositoryImpl implements AccountTransactionRepos
 		this.accountTransactionRepository.save(this.toEntity(accountTransaction));
 	}
 	
-	private AccountTransaction toDomain(AccountTransactionEntity entity) {
+	public AccountTransaction toDomain(AccountTransactionEntity entity) {
 		return AccountTransaction.builder()
 					.amount(entity.getAmount())
 					.transactionDate(entity.getTransactionDate())
 					.build();
 	}
 
-	private AccountTransactionEntity toEntity(AccountTransaction domain) {
+	public AccountTransactionEntity toEntity(AccountTransaction domain) {
 		return AccountTransactionEntity.builder()
 					.amount(domain.getAmount())
 					.bankAccount(BankAccountEntity.builder().id(domain.getBankAccount().getId()).build())

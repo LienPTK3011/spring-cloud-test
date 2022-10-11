@@ -44,7 +44,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 				).build();
 		
 		// save order
-		SaleOrder saleOrder = this.saleOrderRepository.save(orderInfo);
+		this.saleOrderRepository.save(orderInfo);
 		
 		// customer balance reduce
 		this.customerClientService.reduceCustomerDepositAmount(
@@ -52,7 +52,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 		);
 
 		// product number reduce
-		for (SaleOrderDetail orderDetail: saleOrder.getSaleOrderDetails()) {
+		for (SaleOrderDetail orderDetail: orderInfo.getSaleOrderDetails()) {
 			this.productClientService.increaseProduct(
 				new ProductIncreaseDTO(orderDetail.getProductId(), -orderDetail.getProductCount())
 			);

@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
 			oCustomer.get().reduceCustomerAmount(amount);
 
 			// update customer
-			Customer result = this.customerRepository.save(oCustomer.get());
+			this.customerRepository.save(oCustomer.get());
 			
 			this.accountTransactionRepository.addTransaction(
 					AccountTransaction.builder()
@@ -46,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
 						.build()
 			);
 			
-			return result;
+			return oCustomer.get();
 
 		}
 		return null;
@@ -62,14 +62,17 @@ public class CustomerServiceImpl implements CustomerService {
 			oCustomer.get().addingBalance(amount);
 
 			// update customer
-			return this.customerRepository.save(oCustomer.get());
+			this.customerRepository.save(oCustomer.get());
+			
+			return oCustomer.get();
 		}
 		return null;
 	}
 
 	@Override
 	public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
-		Customer customer = this.customerRepository.save(this.toDomain(customerDTO));
+		Customer domain = this.toDomain(customerDTO);
+		Customer customer = this.customerRepository.save(domain);
 		return this.toDTO(customer);
 	}
 	

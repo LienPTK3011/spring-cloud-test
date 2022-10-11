@@ -17,11 +17,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "customer")
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerEntity implements Serializable {
@@ -44,9 +46,14 @@ public class CustomerEntity implements Serializable {
 
 	@Column(name = "email")
 	private String email;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bank_account_id", referencedColumnName = "id")
+	@JoinColumn(name = "bank_account_id", referencedColumnName = "id")
 	private BankAccountEntity bankAccount;
 
+	@Override
+	public boolean equals(Object obj) {
+		CustomerEntity entity = (CustomerEntity) obj;
+		return this.id == entity.getId();
+	}
 }

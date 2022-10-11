@@ -5,9 +5,7 @@ import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
-@Setter
 @Getter
 @Builder
 @AllArgsConstructor
@@ -24,6 +22,12 @@ public class Customer {
 	private String email;
 
 	private BankAccount bankAccount;
+	
+	@Override
+	public boolean equals(Object obj) {
+		Customer customer = (Customer) obj;
+		return this.getId() == customer.getId();
+	}
 
 	public void reduceCustomerAmount(double amount) {
 		if (this.bankAccount.getRemainAmount() > amount) {
