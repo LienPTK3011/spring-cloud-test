@@ -116,4 +116,18 @@ public class CustomerRepositoryTests {
 		assertEquals(domain, customerRepository.findById(customer.getId()).get());
 
 	}
+	
+	@Test
+	void testCustomerBuilder() {
+		CustomerEntity entity = CustomerEntity.builder()
+			.id(null)
+			.name(null)
+			.email(null)
+			.birthday(null)
+			.gender(null)
+			.bankAccount(null)
+			.build();
+	
+		assertEquals(null , entity.getBankAccount());
+	}
 }

@@ -78,6 +78,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	private Customer toDomain(CustomerDTO customerDTO) {
 		return Customer.builder()
+				.id(customerDTO.getId())
 				.birthday(DateHelper.convertStringToLocalDate(customerDTO.getBirthday(), DateHelper.DATE_FORMAT))
 				.name(customerDTO.getName())
 				.gender(Gender.valueOf(customerDTO.getGender()))
@@ -95,6 +96,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	private CustomerDTO toDTO(Customer customer) {
 		return CustomerDTO.builder()
+				.id(customer.getId())
 				.birthday(DateHelper.convertLocalDateToString(customer.getBirthday(), DateHelper.DATE_FORMAT))
 				.name(customer.getName())
 				.gender(customer.getGender().value)
