@@ -20,14 +20,16 @@ public class ProductTests {
 	}
 	
 	@Test
-	void tesst_builderr() {
-		assertEquals(1, product.getId());
-		assertEquals("123", product.getCode());
-		assertEquals("Demo", product.getName());
-		assertEquals("adadasdas", product.getDescription());
-		assertEquals(1000, product.getRemainNumber());
-		assertEquals(500, product.getUnitPrice());
-		assertEquals(1, product.getId());
+	void tesst_builder() {
+		Product product = Product.builder()
+							.id(null)
+							.code(null)
+							.name(null)
+							.description(null)
+							.remainNumber(100)
+							.unitPrice(50)
+							.build();
+		assertEquals(null, product.getCode());
 	}
 
 	@Test

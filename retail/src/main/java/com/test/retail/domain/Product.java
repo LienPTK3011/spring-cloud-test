@@ -2,13 +2,11 @@ package com.test.retail.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
 @Builder
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Product {
 
 	private Integer id;
@@ -25,5 +23,11 @@ public class Product {
 
 	public void increaseProductNumber(int productNumber) {
 		this.remainNumber += productNumber;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Product product = (Product) obj;
+		return this.code == product.getCode();
 	}
 }
